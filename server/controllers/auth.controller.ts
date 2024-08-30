@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express"
 import asyncErrorWrapper from "express-async-handler"
 import User from "../models/user.model"
+import generateTokenAndSetCookie from "../utils/generateTokenAndSetCookie"
 
 export const login = asyncErrorWrapper(
   async (req: Request, res: Response, next: NextFunction) => {}
@@ -25,10 +26,15 @@ export const signup = asyncErrorWrapper(
       profilePicture,
     })
 
+    generateTokenAndSetCookie(user.id, res)
+
     res.status(201).json({
       success: true,
       message: "Signed up successfully.",
-      data: user,
+      data: {
+        ...(user as any)._doc,
+        password: undefined,
+      },
     })
   }
 )
