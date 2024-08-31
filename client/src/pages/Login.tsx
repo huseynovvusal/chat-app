@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 
 import { Input } from "@/components/ui/input"
 import React, { useState } from "react"
+import { Link } from "react-router-dom"
 
 export default function Login() {
   const [form, setForm] = useState({
@@ -25,9 +26,23 @@ export default function Login() {
             Lorem ipsum dolor sit amet.
           </p>
         </div>
-        <Input type="text" placeholder="Username" value={form.username} />
-        <Input type="password" placeholder="Password" value={form.password} />
+        <Input
+          type="text"
+          placeholder="Username"
+          value={form.username}
+          onChange={(e) => setForm({ ...form, username: e.target.value })}
+        />
+        <Input
+          type="password"
+          placeholder="Password"
+          value={form.password}
+          onChange={(e) => setForm({ ...form, password: e.target.value })}
+        />
         <Button type="submit">Login</Button>
+
+        <Link to="/signup">
+          <p className="text-sm text-blue-800">Don't have an account?</p>
+        </Link>
       </form>
     </div>
   )
