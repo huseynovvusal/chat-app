@@ -34,7 +34,8 @@ export const errorHandler = (
       customError = new CustomError("Unexpected Syntax", 400)
       break
     case "ValidationError":
-      customError = new CustomError(extractMongoServerError(err.message), 400)
+      let { message, errors } = extractMongoServerError(err.message)
+      customError = new CustomError(message, 400, errors)
       break
     case "CastError":
       customError = new CustomError("Please provide a valid ID.", 400)
@@ -44,6 +45,7 @@ export const errorHandler = (
   res.status(customError.status || 500).json({
     success: false,
     message: customError.message || "Internal server error",
+    errors: customError.errors,
   })
 }
 
@@ -57,7 +59,7 @@ const extractMongoServerError = (errorMessage: string) => {
     errors.push(splittedError[splittedError.length - 1])
   }
 
-  return errors.join(". ")
+  return { message: errors.join(". "), errors }
 }
 
 export default extractMongoServerError
