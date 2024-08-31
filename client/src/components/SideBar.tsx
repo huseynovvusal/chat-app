@@ -1,6 +1,9 @@
-import React from "react"
 import SearchBar from "./SearchBar"
 import User from "./User"
+import { useAuth } from "@/context/AuthContext"
+import { IAuthContext } from "@/interfaces/context"
+import { UserProps } from "@/interfaces/props"
+import LogoutButton from "./LogoutButton"
 
 const users = [
   {
@@ -27,15 +30,14 @@ const users = [
 ]
 
 export default function SideBar() {
+  const { authUser } = useAuth() as IAuthContext
+
   return (
     <div className="w-full h-full py-6 px-4 flex flex-col gap-6 overflow-y-scroll">
-      <User
-        firstName="Vusal"
-        lastName="Huseynov"
-        username="huseynovvusal"
-        profilePicture="https://avatar.iran.liara.run/username?username=Vusal+Huseynov"
-        disabled
-      />
+      <div className="flex items-center justify-between">
+        <User {...(authUser as UserProps)} disabled />
+        <LogoutButton />
+      </div>
 
       <SearchBar />
 

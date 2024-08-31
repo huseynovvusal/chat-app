@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState } from "react"
 
 export const AuthContext = createContext<IAuthContext | undefined>(undefined)
 
-export const useAuthContext = () => {
+export const useAuth = () => {
   return useContext(AuthContext)
 }
 

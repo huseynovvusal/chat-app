@@ -1,12 +1,5 @@
+import { UserProps } from "@/interfaces/props"
 import React from "react"
-
-export interface UserProps {
-  firstName: string
-  lastName: string
-  username: string
-  profilePicture: string
-  disabled?: boolean
-}
 
 export default function User({
   firstName,

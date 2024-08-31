@@ -1,4 +1,4 @@
-import { useAuthContext } from "@/context/AuthContext"
+import { useAuth } from "@/context/AuthContext"
 import { IAuthContext } from "@/interfaces/context"
 import React, { useState } from "react"
 
@@ -6,7 +6,7 @@ const useSignup = () => {
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<string[] | null>(null)
 
-  const { setAuthUser } = useAuthContext() as IAuthContext
+  const { setAuthUser } = useAuth() as IAuthContext
 
   const signup = async (formData: any) => {
     setLoading(true)
