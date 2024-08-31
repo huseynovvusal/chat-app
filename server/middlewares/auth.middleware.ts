@@ -26,8 +26,6 @@ export const getAccessToRoute = asyncErrorWrapper(
       return next(new CustomError("User not found.", 404))
     }
 
-    // !!
-    console.log("USER", user)
     ;(req as any).user = user
 
     next()
