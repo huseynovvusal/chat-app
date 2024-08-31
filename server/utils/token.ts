@@ -13,7 +13,7 @@ const generateTokenAndSetCookie = (userId: string, res: Response) => {
     maxAge: parseInt(process.env.JWT_COOKIE_EXPIRES as string),
     httpOnly: true,
     secure: process.env.NODE_ENV === "development",
-    // sameSite: "strict",
+    sameSite: "strict",
   })
 }
 

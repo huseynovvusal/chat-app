@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express"
 import asyncErrorWrapper from "express-async-handler"
 import User from "../models/user.model"
-import generateTokenAndSetCookie from "../utils/generateTokenAndSetCookie"
+import generateTokenAndSetCookie from "../utils/token"
 
 export const login = asyncErrorWrapper(
   async (req: Request, res: Response, next: NextFunction) => {}
