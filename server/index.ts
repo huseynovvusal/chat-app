@@ -4,6 +4,7 @@ import router from "./routers"
 import { errorHandler } from "./middlewares/error.middleware"
 import { connectDatabase } from "./helpers/db.helper"
 import helmet from "helmet"
+import cookieParser from "cookie-parser"
 
 dotenv.config()
 
@@ -16,6 +17,7 @@ const app = express()
 // Middlewares
 app.use(express.json())
 app.use(helmet())
+app.use(cookieParser())
 
 // Router
 app.use("/api", router)
