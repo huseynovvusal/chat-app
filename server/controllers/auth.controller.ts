@@ -26,7 +26,7 @@ export const login = asyncErrorWrapper(
 
     generateTokenAndSetCookie(user.id, res)
 
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       message: "Signed up successfully.",
       data: {
@@ -38,7 +38,12 @@ export const login = asyncErrorWrapper(
 )
 
 export const logout = asyncErrorWrapper(
-  async (req: Request, res: Response, next: NextFunction) => {}
+  async (req: Request, res: Response, next: NextFunction) => {
+    res
+      .clearCookie("access_token")
+      .status(200)
+      .json({ success: true, message: "Logged out successfully." })
+  }
 )
 
 export const signup = asyncErrorWrapper(
