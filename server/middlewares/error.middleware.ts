@@ -9,6 +9,9 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
+  // !
+  console.log(err)
+
   let customError = err
 
   if ("code" in err && err.code === 11000) {
