@@ -5,6 +5,7 @@ import { errorHandler } from "./middlewares/error.middleware"
 import { connectDatabase } from "./helpers/db.helper"
 import helmet from "helmet"
 import cookieParser from "cookie-parser"
+import cors from "cors"
 
 dotenv.config()
 
@@ -18,6 +19,7 @@ const app = express()
 app.use(express.json())
 app.use(helmet())
 app.use(cookieParser())
+app.use(cors())
 
 // Router
 app.use("/api", router)

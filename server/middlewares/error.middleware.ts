@@ -59,7 +59,13 @@ const extractMongoServerError = (errorMessage: string) => {
     errors.push(splittedError[splittedError.length - 1])
   }
 
-  return { message: errors.join(". "), errors }
+  const message = errors.join(". ")
+
+  for (let i = 0; i < errors.length - 1; i++) {
+    errors[i] += "."
+  }
+
+  return { message, errors }
 }
 
 export default extractMongoServerError

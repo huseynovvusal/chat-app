@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 
 import { Input } from "@/components/ui/input"
+import useSignup from "@/hooks/useSignup"
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 
@@ -13,15 +14,21 @@ export default function Signup() {
     password: "",
   })
 
-  const handleSubmit = () => {
-    // ...
+  const { loading, errors, signup } = useSignup()
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    await signup(form)
   }
 
   return (
     <div className="w-full h-full flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
-        className="border-[0.5px] shadow-lg py-6 px-6 rounded-3xl w-[350px] flex flex-col  gap-4"
+        className={`border-[0.5px] shadow-lg py-6 px-6 rounded-3xl w-[350px] flex flex-col  gap-4 ${
+          loading && "cursor-not-allowed pointer-events-none opacity-75"
+        }`}
       >
         <div className="flex flex-col gap-2">
           <h2 className="text-3xl font-medium">Signup</h2>
@@ -64,6 +71,16 @@ export default function Signup() {
         <Link to="/login">
           <p className="text-sm text-blue-800">Already have an account?</p>
         </Link>
+
+        {/* //? Errors */}
+        <div className="flex flex-col gap-1">
+          {errors &&
+            errors.map((error, index) => (
+              <p key={index} className="text-xs font-normal text-red-800">
+                {error}
+              </p>
+            ))}
+        </div>
       </form>
     </div>
   )
