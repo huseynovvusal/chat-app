@@ -30,7 +30,7 @@ export default function Chat() {
 
   return (
     <div className="w-full h-full flex flex-col justify-between">
-      {/* <div className="w-full h-full bg-red-300"></div> */}
+      <div className="w-full h-full"></div>
 
       <div className="px-6">
         <div className="flex rounded-[20px] px-2 gap-4 mb-4 bg-slate-200 items-center">
@@ -38,7 +38,7 @@ export default function Chat() {
             ref={textAreaRef}
             placeholder="Hello! How are you?"
             rows={1}
-            className="resize-none border-none overflow-y-auto py-4 focus-visible:ring-0 focus-visible:ring-offset-0  bg-transparent"
+            className="resize-none font-medium border-none overflow-y-auto py-4 focus-visible:ring-0 focus-visible:ring-offset-0  bg-transparent"
             onInput={adjustHeight}
           />
           <Button
