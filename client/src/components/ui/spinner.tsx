@@ -1,8 +1,16 @@
-export default function Spinner({ className }: { className?: string }) {
+export default function Spinner({
+  className,
+  size = 4,
+}: {
+  className?: string
+  size?: number
+}) {
+  const sizeClass = `h-${size} w-${size}`
+
   return (
     <svg
       aria-hidden="true"
-      className={`w-4 h-4 animate-spin fill-slate-500 ${className}`}
+      className={`${sizeClass} animate-spin fill-gray-400 text-gray-200 ${className}`}
       viewBox="0 0 100 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
