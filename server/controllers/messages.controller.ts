@@ -20,7 +20,7 @@ export const sendMessage = asyncErrorWrapper(
       })
     }
 
-    const newMessage = new Message({
+    let newMessage = new Message({
       sender: senderId,
       receiver: receiverId,
       text,
@@ -34,6 +34,11 @@ export const sendMessage = asyncErrorWrapper(
     await conversation.save()
 
     //TODO: SOCKET.IO CODE
+
+    newMessage = await newMessage.populate({
+      path: "sender",
+      select: "profilePicture",
+    })
 
     res.status(201).json({
       success: true,

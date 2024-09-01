@@ -1,4 +1,5 @@
 import { MessageProps } from "@/interfaces/props"
+import { createdAtChatDate } from "@/utils/date"
 
 export default function Message({
   text,
@@ -12,7 +13,10 @@ export default function Message({
         incoming ? "flex-row" : "flex-row-reverse"
       } items-end gap-2`}
     >
-      <img className="w-10 h-10 rounded-full" src={sender.profilePicture} />
+      <img
+        className="w-10 h-10 rounded-full select-none pointer-events-none"
+        src={sender.profilePicture}
+      />
       <div
         className={`max-w-md flex flex-col py-2 px-4 ${
           incoming
@@ -23,11 +27,11 @@ export default function Message({
         <p className="text-bas font-regular">{text}</p>
 
         <span
-          className={`text-xs text-slate-500 ${
+          className={`text-xs text-slate-500 select-none ${
             incoming ? "self-end" : "self-start"
           }`}
         >
-          {new Date(createdAt).toDateString()}
+          {createdAtChatDate(createdAt)}
         </span>
       </div>
     </div>

@@ -21,7 +21,7 @@ export default function User({
         />
         <span className="inline-block w-3 h-3 bg-green-500 rounded-full absolute bottom-[0.1rem] right-[0.1rem] border-2 border-background" />
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col items-start">
         <span className="font-medium text-base text-slate-800">
           {firstName} {lastName}
         </span>

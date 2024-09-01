@@ -5,16 +5,13 @@ const useSendMessage = () => {
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<string[] | null>(null)
 
-  const { messages, setMessages, selectedConversation } = useConversation()
+  const { messages, setMessages } = useConversation()
 
   const sendMessage = async (formData: {
     receiverId: string
     text: string
   }) => {
     setLoading(true)
-
-    // !
-    console.log(formData)
 
     try {
       const response = await fetch(

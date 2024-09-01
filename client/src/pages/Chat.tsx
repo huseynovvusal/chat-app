@@ -3,6 +3,7 @@ import Messages from "@/components/Messages"
 import { Button } from "@/components/ui/button"
 import Spinner from "@/components/ui/spinner"
 import { Textarea } from "@/components/ui/textarea"
+import useGetMessage from "@/hooks/useGetMessages"
 import useSendMessage from "@/hooks/useSendMessage"
 import { SendIcon } from "lucide-react"
 import { useRef, useState } from "react"
@@ -11,10 +12,13 @@ import { useParams, useSearchParams } from "react-router-dom"
 export default function Chat() {
   const [text, setText] = useState("")
 
-  const { chatId } = useParams()
-  const [searchParams, setSearchParams] = useSearchParams()
+  // const { chatId } = useParams()
+  const [searchParams] = useSearchParams()
 
   const { loading, sendMessage } = useSendMessage()
+  const { loading: loadingMessages } = useGetMessage(
+    searchParams.get("receiverId")
+  )
 
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
 
@@ -50,18 +54,21 @@ export default function Chat() {
     })
 
     setText("")
+    // adjustHeight()
   }
 
   return (
     <div className="w-full h-full flex flex-col justify-between">
-      <div className="w-full h-full px-6 py-6">
-        <Messages />
+      <div className="w-full h-full overflow-y-scroll px-6 py-6 flex items-center justify-center">
+        {loadingMessages ? <Spinner size={8} /> : <Messages />}
       </div>
 
-      <div className="px-6">
+      <div className="px-6 bg-transparent">
         <form
           onSubmit={handleSubmit}
-          className="flex rounded-[20px] px-2 gap-4 mb-4 bg-slate-200 items-center"
+          className={`flex rounded-[20px] px-2 gap-4 mb-4 bg-slate-200 items-center ${
+            loading && "pointer-events-none cursor-not-allowed opacity-75"
+          }`}
         >
           <Textarea
             value={text}
