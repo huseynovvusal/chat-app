@@ -3,7 +3,6 @@ import { MessageProps } from "@/interfaces/props"
 export default function Message({
   text,
   sender,
-  receiver,
   createdAt,
   incoming = false,
 }: MessageProps) {
@@ -21,16 +20,14 @@ export default function Message({
             : "bg-slate-900 text-slate-100 self-end rounded-br-none"
         } rounded-xl gap-1`}
       >
-        <p className="text-bas font-regular">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, eius.
-        </p>
+        <p className="text-bas font-regular">{text}</p>
 
         <span
           className={`text-xs text-slate-500 ${
             incoming ? "self-end" : "self-start"
           }`}
         >
-          13:25
+          {new Date(createdAt).toDateString()}
         </span>
       </div>
     </div>

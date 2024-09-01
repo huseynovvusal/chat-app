@@ -14,9 +14,6 @@ export interface MessageProps {
   sender: {
     profilePicture: string
   }
-  receiver: {
-    profilePicture: string
-  }
-  createdAt: Date
+  createdAt: string
   incoming?: boolean
 }

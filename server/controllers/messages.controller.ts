@@ -21,8 +21,8 @@ export const sendMessage = asyncErrorWrapper(
     }
 
     const newMessage = new Message({
-      senderId,
-      receiverId,
+      sender: senderId,
+      receiver: receiverId,
       text,
     })
 
@@ -30,13 +30,10 @@ export const sendMessage = asyncErrorWrapper(
       conversation.messages.push(newMessage.id)
     }
 
-    //TODO: SOCKET.IO CODE
-
-    // !
-    // await Promise.all([conversation.save(), newMessage.save()])
-
     await newMessage.save()
     await conversation.save()
+
+    //TODO: SOCKET.IO CODE
 
     res.status(201).json({
       success: true,
@@ -55,7 +52,7 @@ export const getMessages = asyncErrorWrapper(
       participiants: { $all: [senderId, receiverId] },
     }).populate({
       path: "messages",
-      options: { sort: { createdAt: -1 } },
+      populate: { path: "sender", select: "profilePicture" },
     })
 
     if (!conversation) {

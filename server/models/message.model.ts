@@ -3,12 +3,12 @@ import { IMessage } from "../interfaces/message.interface"
 
 const MessageSchema = new mongoose.Schema<IMessage>(
   {
-    senderId: {
+    sender: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    receiverId: {
+    receiver: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,

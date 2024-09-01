@@ -23,7 +23,13 @@ export default function Conversations() {
       {data?.length ? (
         <div className="flex flex-col gap-4">
           {data.map((conversation: any) => (
-            <Link key={conversation._id} to={`/chats/${conversation._id}`}>
+            <Link
+              key={conversation._id}
+              to={{
+                pathname: `/chats/${conversation._id}`,
+                search: `?receiverId=${conversation.receiver._id}`,
+              }}
+            >
               <User
                 selected={conversation._id === chatId}
                 {...conversation.receiver}
