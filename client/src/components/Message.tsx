@@ -9,7 +9,7 @@ export default function Message({
 }: MessageProps) {
   return (
     <div
-      className={`flex ${
+      className={`flex my-1 ${
         incoming ? "flex-row" : "flex-row-reverse"
       } items-end gap-2`}
     >

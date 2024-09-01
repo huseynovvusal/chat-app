@@ -21,7 +21,7 @@ export default function Messages() {
   if (!authUser) return
 
   return (
-    <div className="flex flex-col gap-4 w-full">
+    <div className="flex flex-col  w-full h-full max-h-full px-6 overflow-y-scroll">
       {messages &&
         messages.map((message) => (
           <Message

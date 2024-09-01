@@ -59,9 +59,13 @@ export default function Chat() {
 
   return (
     <div className="w-full h-full flex flex-col justify-between">
-      <div className="w-full h-full overflow-y-scroll px-6 py-6 flex items-center justify-center">
-        {loadingMessages ? <Spinner size={8} /> : <Messages />}
-      </div>
+      {loadingMessages ? (
+        <div className="w-full h-full items-center justify-center">
+          <Spinner size={8} />
+        </div>
+      ) : (
+        <Messages />
+      )}
 
       <div className="px-6 bg-transparent">
         <form
