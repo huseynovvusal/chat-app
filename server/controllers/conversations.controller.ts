@@ -18,6 +18,9 @@ export const getUserConversations = asyncErrorWrapper(
         receiver: conversation.participiants.find(
           (user: any) => user.id !== userId
         ),
+        sender: conversation.participiants.find(
+          (user: any) => user.id === userId
+        ),
         lastMessage: conversation.messages[conversation.messages.length - 1],
         messages: undefined,
         participiants: undefined,

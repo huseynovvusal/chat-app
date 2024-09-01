@@ -1,3 +1,4 @@
+import Message from "@/components/Message"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { SendIcon } from "lucide-react"
@@ -30,7 +31,41 @@ export default function Chat() {
 
   return (
     <div className="w-full h-full flex flex-col justify-between">
-      <div className="w-full h-full"></div>
+      <div className="w-full h-full px-6 py-6 gap-6 flex flex-col">
+        <Message
+          createdAt={new Date()}
+          sender={
+            {
+        
+          profilePicture: "https://i.pravatar.cc/300",
+            }
+          }
+          receiver={
+            {
+        
+          profilePicture: "https://i.pravatar.cc/300",
+            }
+          }
+          text={"Hello!"}
+          incoming
+        />
+        <Message
+          createdAt={new Date()}
+          sender={
+            {
+        
+          profilePicture: "https://i.pravatar.cc/300",
+            }
+          }
+          receiver={
+            {
+        
+          profilePicture: "https://i.pravatar.cc/300",
+            }
+          }
+          text={"Hello! How are you?"}
+        />
+      </div>
 
       <div className="px-6">
         <div className="flex rounded-[20px] px-2 gap-4 mb-4 bg-slate-200 items-center">

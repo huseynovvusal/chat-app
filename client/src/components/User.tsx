@@ -14,10 +14,13 @@ export default function User({
         !disabled && "hover:border-slate-200 px-2 py-2 cursor-pointer"
       } ${selected && "bg-slate-200 border-slate-400 pointer-events-none"}`}
     >
-      <img
-        className="w-12 h-12 rounded-full pointer-events-none border-2 border-transparent outline-dashed outline-2 outline-gray-300"
-        src={profilePicture}
-      />
+      <div className="relative">
+        <img
+          className="w-12 h-12 min-w-12 min-h-12 rounded-full pointer-events-none"
+          src={profilePicture}
+        />
+        <span className="inline-block w-3 h-3 bg-green-500 rounded-full absolute bottom-[0.1rem] right-[0.1rem] border-2 border-background" />
+      </div>
       <div className="flex flex-col">
         <span className="font-medium text-base text-slate-800">
           {firstName} {lastName}

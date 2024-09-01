@@ -8,7 +8,7 @@ export default function SearchBar() {
     <form className="flex gap-2">
       <Input className="w-full" placeholder="Search for username..." />
 
-      <Button type="submit">
+      <Button className="bg-slate-700" type="submit">
         <SearchIcon />
       </Button>
     </form>
