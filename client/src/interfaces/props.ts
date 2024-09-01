@@ -4,4 +4,5 @@ export interface UserProps {
   username: string
   profilePicture: string
   disabled?: boolean
+  selected?: boolean
 }

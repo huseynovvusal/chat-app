@@ -1,9 +1,12 @@
 import useConversations from "@/hooks/useConversations"
 import User from "./User"
 import Spinner from "./ui/spinner"
+import { Link, useParams } from "react-router-dom"
 
 export default function Conversations() {
   const { loading, data } = useConversations()
+
+  const { chatId } = useParams()
 
   if (loading) {
     return (
@@ -20,10 +23,12 @@ export default function Conversations() {
       {data?.length ? (
         <div className="flex flex-col gap-4">
           {data.map((conversation: any) => (
-            <User
-              key={conversation.receiver.username}
-              {...conversation.receiver}
-            />
+            <Link key={conversation._id} to={`/chats/${conversation._id}`}>
+              <User
+                selected={conversation._id === chatId}
+                {...conversation.receiver}
+              />
+            </Link>
           ))}
         </div>
       ) : (
