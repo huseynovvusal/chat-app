@@ -60,7 +60,7 @@ export default function Chat() {
   return (
     <div className="w-full h-full flex flex-col justify-between">
       {loadingMessages ? (
-        <div className="w-full h-full items-center justify-center">
+        <div className="w-full h-full flex items-center justify-center">
           <Spinner size={8} />
         </div>
       ) : (

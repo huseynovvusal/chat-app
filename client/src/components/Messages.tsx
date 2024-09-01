@@ -14,7 +14,7 @@ export default function Messages() {
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.scrollIntoView({ behavior: "smooth" })
+      ref.current.scrollIntoView()
     }
   }, [messages, ref])
 
