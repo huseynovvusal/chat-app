@@ -3,7 +3,7 @@ import { Input } from "./ui/input"
 import { SearchIcon } from "lucide-react"
 import { Button } from "./ui/button"
 import useSearchUser from "@/hooks/useSearchUser"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { UserProps } from "@/interfaces/props"
 import User from "./User"
 import Spinner from "./ui/spinner"
@@ -11,13 +11,18 @@ import SideBarSectionTitle from "./SideBarSectionTitle"
 
 export default function SearchBar() {
   const [search, setSearch] = useState("")
+  const [searched, setSearched] = useState(false)
 
   const { loading, errors, searchUser, user } = useSearchUser()
+
+  const { receiverId } = useParams()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     await searchUser(search)
+
+    setSearched(true)
   }
 
   return (
@@ -40,13 +45,16 @@ export default function SearchBar() {
         </Button>
       </form>
 
-      {!loading && search ? (
+      {!loading && searched ? (
         <>
           <SideBarSectionTitle text="🔍 Search result" />
           {user ? (
             <div className="flex flex-col gap-4">
               <Link to={`/chats/${user._id}`}>
-                <User {...(user as UserProps)} />
+                <User
+                  {...(user as UserProps)}
+                  selected={receiverId === user._id}
+                />
               </Link>
             </div>
           ) : (

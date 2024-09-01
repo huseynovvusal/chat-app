@@ -4,6 +4,7 @@ import Message from "./Message"
 import { useAuth } from "@/context/AuthContext"
 import { IAuthContext } from "@/interfaces/context"
 import { useEffect, useRef } from "react"
+import { useParams } from "react-router-dom"
 
 export default function Messages() {
   const { messages } = useConversation()

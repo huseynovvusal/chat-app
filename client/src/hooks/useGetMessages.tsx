@@ -8,6 +8,9 @@ const useGetMessages = (receiverId: string | null) => {
   const { messages, setMessages } = useConversation()
 
   const getMessages = async () => {
+    // !!!
+    console.log("MESAGESS ARE GETTING......")
+
     if (!receiverId) return
 
     setLoading(true)
@@ -19,9 +22,12 @@ const useGetMessages = (receiverId: string | null) => {
 
       if (!data.success) {
         setErrors(data.errors)
+        setMessages([])
       }
 
-      setMessages(data.data)
+      else{
+        setMessages(data.data)
+      }
     } catch (error) {
       setErrors([error as string])
     } finally {
