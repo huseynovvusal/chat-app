@@ -15,7 +15,7 @@ export default function User({
       }`}
     >
       <img
-        className="w-12 h-12 rounded-full pointer-events-none border-2 border-transparent outline-dashed outline-2 outline-slate-400"
+        className="w-12 h-12 rounded-full pointer-events-none border-2 border-transparent outline-dashed outline-2 outline-gray-300"
         src={profilePicture}
       />
       <div className="flex flex-col">

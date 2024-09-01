@@ -2,14 +2,19 @@ import { createBrowserRouter } from "react-router-dom"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
-import ProtectRouteForSignup from "./private/ProtectRouteForSignup"
 import Chat from "./pages/Chat"
 import NoChat from "./pages/NoChat"
+import ProtectRouteForAuth from "./private/ProtectRouteForAuth"
+import ProtectRouteForUnAuth from "./private/ProtectRouteForUnAuth"
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <ProtectRouteForUnAuth>
+        <Home />
+      </ProtectRouteForUnAuth>
+    ),
     children: [
       {
         path: "chat/:chatId",
@@ -23,14 +28,18 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <ProtectRouteForAuth>
+        <Login />
+      </ProtectRouteForAuth>
+    ),
   },
   {
     path: "/signup",
     element: (
-      <ProtectRouteForSignup>
+      <ProtectRouteForAuth>
         <Signup />
-      </ProtectRouteForSignup>
+      </ProtectRouteForAuth>
     ),
   },
 ])

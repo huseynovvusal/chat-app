@@ -2,23 +2,17 @@ import { useAuth } from "@/context/AuthContext"
 import { IAuthContext } from "@/interfaces/context"
 import { useState } from "react"
 
-const useSignup = () => {
+const useLogout = () => {
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<string[] | null>(null)
 
   const { setAuthUser } = useAuth() as IAuthContext
 
-  const signup = async (formData: any) => {
+  const logout = async () => {
     setLoading(true)
 
     try {
-      const response = await fetch("/api/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
+      const response = await fetch("/api/auth/logout")
 
       const data = await response.json()
 
@@ -26,8 +20,8 @@ const useSignup = () => {
         setErrors(data.errors)
       }
 
-      localStorage.setItem("chat-user", JSON.stringify(data.data))
-      setAuthUser(data.data)
+      localStorage.removeItem("chat-user")
+      setAuthUser(null)
     } catch (error) {
       setErrors([error as string])
     } finally {
@@ -35,7 +29,7 @@ const useSignup = () => {
     }
   }
 
-  return { loading, errors, signup }
+  return { loading, errors, logout }
 }
 
-export default useSignup
+export default useLogout

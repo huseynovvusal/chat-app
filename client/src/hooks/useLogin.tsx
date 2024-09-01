@@ -2,17 +2,17 @@ import { useAuth } from "@/context/AuthContext"
 import { IAuthContext } from "@/interfaces/context"
 import { useState } from "react"
 
-const useSignup = () => {
+const useLogin = () => {
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<string[] | null>(null)
 
   const { setAuthUser } = useAuth() as IAuthContext
 
-  const signup = async (formData: any) => {
+  const login = async (formData: any) => {
     setLoading(true)
 
     try {
-      const response = await fetch("/api/auth/signup", {
+      const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,7 +35,7 @@ const useSignup = () => {
     }
   }
 
-  return { loading, errors, signup }
+  return { loading, errors, login }
 }
 
-export default useSignup
+export default useLogin
