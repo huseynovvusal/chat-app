@@ -1,7 +1,7 @@
 import useConversation from "@/store/useConversation"
 import { useEffect, useState } from "react"
 
-const useGetMessage = (receiverId: string | null) => {
+const useGetMessages = (receiverId: string | null) => {
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<string[] | null>(null)
 
@@ -31,9 +31,9 @@ const useGetMessage = (receiverId: string | null) => {
 
   useEffect(() => {
     getMessages()
-  }, [])
+  }, [receiverId])
 
   return { loading, errors }
 }
 
-export default useGetMessage
+export default useGetMessages

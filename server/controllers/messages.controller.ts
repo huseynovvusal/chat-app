@@ -10,6 +10,10 @@ export const sendMessage = asyncErrorWrapper(
     const senderId = (req as any).user.id
     const { text } = req.body
 
+    if (senderId === receiverId) {
+      return next(new CustomError("You can't send message to yourself.", 400))
+    }
+
     let conversation = await Conversation.findOne({
       participiants: { $all: [senderId, receiverId] },
     })

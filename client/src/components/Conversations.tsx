@@ -2,11 +2,12 @@ import useConversations from "@/hooks/useConversations"
 import User from "./User"
 import Spinner from "./ui/spinner"
 import { Link, useParams } from "react-router-dom"
+import SideBarSectionTitle from "./SideBarSectionTitle"
 
 export default function Conversations() {
-  const { loading, data } = useConversations()
+  const { receiverId } = useParams()
 
-  const { chatId } = useParams()
+  const { loading, data } = useConversations()
 
   if (loading) {
     return (
@@ -19,19 +20,19 @@ export default function Conversations() {
   if (!data) return null
 
   return (
-    <>
+    <div className="flex flex-col gap-4">
+      <SideBarSectionTitle text="💬 Chats" />
       {data?.length ? (
         <div className="flex flex-col gap-4">
           {data.map((conversation: any) => (
             <Link
               key={conversation._id}
               to={{
-                pathname: `/chats/${conversation._id}`,
-                search: `?receiverId=${conversation.receiver._id}`,
+                pathname: `/chats/${conversation.receiver._id}`,
               }}
             >
               <User
-                selected={conversation._id === chatId}
+                selected={conversation.receiver._id === receiverId}
                 {...conversation.receiver}
               />
             </Link>
@@ -42,6 +43,6 @@ export default function Conversations() {
           No conversations found.
         </p>
       )}
-    </>
+    </div>
   )
 }

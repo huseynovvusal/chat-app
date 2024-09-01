@@ -1,24 +1,20 @@
-import Message from "@/components/Message"
 import Messages from "@/components/Messages"
 import { Button } from "@/components/ui/button"
 import Spinner from "@/components/ui/spinner"
 import { Textarea } from "@/components/ui/textarea"
-import useGetMessage from "@/hooks/useGetMessages"
+import useGetMessages from "@/hooks/useGetMessages"
 import useSendMessage from "@/hooks/useSendMessage"
 import { SendIcon } from "lucide-react"
 import { useRef, useState } from "react"
-import { useParams, useSearchParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
 export default function Chat() {
   const [text, setText] = useState("")
 
-  // const { chatId } = useParams()
-  const [searchParams] = useSearchParams()
+  const { receiverId } = useParams()
 
   const { loading, sendMessage } = useSendMessage()
-  const { loading: loadingMessages } = useGetMessage(
-    searchParams.get("receiverId")
-  )
+  const { loading: loadingMessages } = useGetMessages(receiverId || null)
 
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
 
@@ -43,8 +39,6 @@ export default function Chat() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    const receiverId = searchParams.get("receiverId")
 
     if (!text || !receiverId) return
 
