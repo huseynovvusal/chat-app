@@ -1,5 +1,6 @@
 import { MessageProps } from "@/interfaces/props"
 import { createdAtChatDate } from "@/utils/date"
+import { formattedMultilineText } from "@/utils/text"
 
 export default function Message({
   text,
@@ -24,7 +25,7 @@ export default function Message({
             : "bg-slate-900 text-slate-100 self-end rounded-br-none"
         } rounded-xl gap-1`}
       >
-        <p className="text-bas font-regular">{text}</p>
+        <p className="text-bas font-regular">{formattedMultilineText(text)}</p>
 
         <span
           className={`text-xs text-slate-500 select-none ${

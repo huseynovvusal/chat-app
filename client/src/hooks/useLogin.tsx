@@ -24,10 +24,10 @@ const useLogin = () => {
 
       if (!data.success) {
         setErrors(data.errors)
+      } else {
+        localStorage.setItem("chat-user", JSON.stringify(data.data))
+        setAuthUser(data.data)
       }
-
-      localStorage.setItem("chat-user", JSON.stringify(data.data))
-      setAuthUser(data.data)
     } catch (error) {
       setErrors([error as string])
     } finally {

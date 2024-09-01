@@ -18,10 +18,10 @@ const useLogout = () => {
 
       if (!data.success) {
         setErrors(data.errors)
+      } else {
+        localStorage.removeItem("chat-user")
+        setAuthUser(null)
       }
-
-      localStorage.removeItem("chat-user")
-      setAuthUser(null)
     } catch (error) {
       setErrors([error as string])
     } finally {
