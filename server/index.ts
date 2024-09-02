@@ -6,14 +6,13 @@ import { connectDatabase } from "./helpers/db.helper"
 import helmet from "helmet"
 import cookieParser from "cookie-parser"
 import cors from "cors"
+import { app, server } from "./socket"
 
 dotenv.config()
 
 // Environment Variables
 const PORT = process.env.PORT
 const NODE_ENV = process.env.NODE_ENV
-
-const app = express()
 
 // Middlewares
 app.use(express.json())
@@ -31,6 +30,6 @@ app.use(errorHandler)
 connectDatabase()
 
 // Start Server
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server is running on PORT: ${PORT} (${NODE_ENV})`)
 })
