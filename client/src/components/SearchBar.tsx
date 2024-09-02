@@ -13,7 +13,7 @@ export default function SearchBar() {
   const [search, setSearch] = useState("")
   const [searched, setSearched] = useState(false)
 
-  const { loading, errors, searchUser, user } = useSearchUser()
+  const { loading, searchUser, user } = useSearchUser()
 
   const { receiverId } = useParams()
 

@@ -3,7 +3,7 @@ import { Button } from "./ui/button"
 import Spinner from "./ui/spinner"
 
 export default function LogoutButton() {
-  const { loading, errors, logout } = useLogout()
+  const { loading, logout } = useLogout()
 
   return (
     <Button

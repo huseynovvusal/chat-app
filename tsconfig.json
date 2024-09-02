@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ESNext", // Use the latest ECMAScript features.
+    "module": "CommonJS", // Node.js uses CommonJS modules.
+    "moduleResolution": "Node", // Resolve modules like Node.js.
+    "outDir": "./server/dist", // Output directory for compiled files.
+    "rootDir": "./server", // Source directory.
+    "strict": true, // Enable all strict type-checking options.
+    "esModuleInterop": true, // Allow interoperability between CommonJS and ES modules.
+    "forceConsistentCasingInFileNames": true, // Disallow inconsistently-cased references to the same file.
+    "skipLibCheck": true, // Skip type checking of all declaration files.
+    "noImplicitAny": true, // Warn on expressions and declarations with an implied `any` type.
+    "resolveJsonModule": true, // Include modules imported with `.json` extension.
+    "allowSyntheticDefaultImports": true, // Allow default imports from modules with no default export.
+    "noEmitOnError": true, // Avoid emitting files if there are any errors.
+    "incremental": true, // Enable faster builds by storing information about previous builds.
+    "sourceMap": true // Generate source maps for debugging.
+  },
+  "include": ["server/**/*.ts"], // Include all TypeScript files in the src directory.
+  "exclude": ["node_modules", "dist", "*.js", "client"] // Exclude node_modules and dist directories.
+}

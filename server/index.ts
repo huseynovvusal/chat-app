@@ -7,6 +7,8 @@ import helmet from "helmet"
 import cookieParser from "cookie-parser"
 import cors from "cors"
 import { app, server } from "./socket"
+import path from "path"
+import { csp } from "./middlewares/security.middleware"
 
 dotenv.config()
 
@@ -19,9 +21,18 @@ app.use(express.json())
 app.use(helmet())
 app.use(cookieParser())
 app.use(cors())
+app.use(csp)
+
+// Static Files
+app.use(express.static(path.join(__dirname, "../../client/dist")))
 
 // Router
 app.use("/api", router)
+
+// React
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/dist/index.html"))
+})
 
 // Error Handler
 app.use(errorHandler)
