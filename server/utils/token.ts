@@ -12,7 +12,7 @@ const generateTokenAndSetCookie = (userId: string, res: Response) => {
   res.cookie("access_token", token, {
     maxAge: parseInt(process.env.JWT_COOKIE_EXPIRES as string),
     httpOnly: true,
-    secure: process.env.NODE_ENV === "development",
+    secure: process.env.NODE_ENV !== "development",
     sameSite: "strict",
   })
 }
