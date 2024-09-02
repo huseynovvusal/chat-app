@@ -20,9 +20,14 @@ export const SocketContextProvider = ({
 
   useEffect(() => {
     if (authUser) {
-      const socket = io("http://localhost:5000", {
-        query: { userId: authUser._id },
-      })
+      const socket = io(
+        import.meta.env.PROD
+          ? "https://huseynovvusal-chat-app.onrender.com"
+          : "http://localhost:5000",
+        {
+          query: { userId: authUser._id },
+        }
+      )
 
       setSocket(socket)
 
