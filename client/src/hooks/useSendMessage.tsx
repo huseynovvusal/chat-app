@@ -30,7 +30,10 @@ const useSendMessage = () => {
       if (!data.success) {
         setErrors(data.errors)
       } else {
-        setMessages([...messages, data.data])
+        setMessages(formData.receiverId, [
+          ...messages[formData.receiverId],
+          data.data,
+        ])
       }
     } catch (error) {
       setErrors([error as string])

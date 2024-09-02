@@ -4,6 +4,7 @@ export interface IMessage {
     profilePicture: string
     _id?: string
   }
+  receiver: string //? ID
   text: string
   createdAt: string
 }

@@ -1,13 +1,19 @@
-import { IMessage } from "@/interfaces/message"
 import useConversation from "@/store/useConversation"
 import Message from "./Message"
 import { useAuth } from "@/context/AuthContext"
 import { IAuthContext } from "@/interfaces/context"
 import { useEffect, useRef } from "react"
 import { useParams } from "react-router-dom"
+import useMessagesListener from "@/hooks/useMessagesListener"
 
 export default function Messages() {
-  const { messages } = useConversation()
+  const { receiverId } = useParams()
+
+  useMessagesListener()
+
+  const messages = useConversation(
+    (state) => state.messages[receiverId as string]
+  )
 
   const ref = useRef<HTMLDivElement | null>(null)
 

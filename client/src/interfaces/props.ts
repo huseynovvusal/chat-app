@@ -1,5 +1,3 @@
-import { IUser } from "./user"
-
 export interface UserProps {
   firstName: string
   lastName: string

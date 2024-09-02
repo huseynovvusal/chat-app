@@ -3,6 +3,7 @@ import asyncErrorWrapper from "express-async-handler"
 import Conversation from "../models/conversation.model"
 import Message from "../models/message.model"
 import { CustomError } from "../helpers/error.helper"
+import { getReceiverSocketId, io } from "../socket"
 
 export const sendMessage = asyncErrorWrapper(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -48,12 +49,16 @@ export const sendMessage = asyncErrorWrapper(
     await newMessage.save()
     await conversation.save()
 
-    //TODO: SOCKET.IO CODE
-
     newMessage = await newMessage.populate({
       path: "sender",
       select: "profilePicture",
     })
+
+    const receiverSocketId = getReceiverSocketId(receiverId)
+
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("newMessage", newMessage)
+    }
 
     res.status(201).json({
       success: true,
