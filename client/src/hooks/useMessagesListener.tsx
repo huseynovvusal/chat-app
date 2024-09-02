@@ -10,6 +10,7 @@ const useMessagesListener = () => {
 
   useEffect(() => {
     socket?.on("newMessage", (newMessage: IMessage) => {
+      newMessage.animate = true
       const senderId = newMessage.sender._id as string
       setMessages(senderId, [...(messages[senderId] || []), newMessage])
     })
@@ -17,7 +18,7 @@ const useMessagesListener = () => {
     return () => {
       socket?.off("newMessage")
     }
-  }, [socket])
+  }, [socket, messages])
 }
 
 export default useMessagesListener

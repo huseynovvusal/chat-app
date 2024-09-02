@@ -15,4 +15,5 @@ export interface MessageProps {
   }
   createdAt: string
   incoming?: boolean
+  animate?: boolean
 }

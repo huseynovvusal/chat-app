@@ -7,11 +7,12 @@ export default function Message({
   sender,
   createdAt,
   incoming = false,
+  animate = false,
 }: MessageProps) {
   return (
     <div
-      className={`flex my-1 ${
-        incoming ? "flex-row" : "flex-row-reverse"
+      className={`flex my-1 ${incoming ? "flex-row" : "flex-row-reverse"} ${
+        animate ? "animate-enter" : ""
       } items-end gap-2`}
     >
       <img

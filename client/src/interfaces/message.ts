@@ -7,4 +7,5 @@ export interface IMessage {
   receiver: string //? ID
   text: string
   createdAt: string
+  animate?: boolean
 }
