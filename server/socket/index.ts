@@ -12,11 +12,24 @@ const io = new Server(server, {
   },
 })
 
+const userSocketMap = new Map<string, string>()
+
 io.on("connection", (socket) => {
   console.log("connected", socket.id)
 
+  const { userId } = socket.handshake.query
+
+  if (userId) {
+    userSocketMap.set(userId as string, socket.id)
+  }
+
+  io.emit("getOnlineUsers", Array.from(userSocketMap.keys()))
+
   socket.on("disconnect", () => {
     console.log("disconnected", socket.id)
+    userSocketMap.delete(userId as string)
+
+    io.emit("getOnlineUsers", Array.from(userSocketMap.keys()))
   })
 })
 

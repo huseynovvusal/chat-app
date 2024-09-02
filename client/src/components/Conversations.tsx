@@ -3,8 +3,12 @@ import User from "./User"
 import Spinner from "./ui/spinner"
 import { Link, useParams } from "react-router-dom"
 import SideBarSectionTitle from "./SideBarSectionTitle"
+import { useSocket } from "@/context/SocketContext"
+import { ISocketContext } from "@/interfaces/context"
 
 export default function Conversations() {
+  const { onlineUsers } = useSocket() as ISocketContext
+
   const { receiverId } = useParams()
 
   const { loading, data } = useConversations()
@@ -32,6 +36,7 @@ export default function Conversations() {
               }}
             >
               <User
+                online={onlineUsers.includes(conversation.receiver._id)}
                 selected={conversation.receiver._id === receiverId}
                 {...conversation.receiver}
               />

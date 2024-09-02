@@ -7,6 +7,7 @@ export interface UserProps {
   profilePicture: string
   disabled?: boolean
   selected?: boolean
+  online?: boolean
 }
 
 export interface MessageProps {
