@@ -8,7 +8,18 @@ export const sendMessage = asyncErrorWrapper(
   async (req: Request, res: Response, next: NextFunction) => {
     const { id: receiverId } = req.params
     const senderId = (req as any).user.id
-    const { text } = req.body
+    let { text } = req.body as { text: string }
+
+    if (!text) {
+      return next(new CustomError("Text is required.", 400))
+    }
+
+    //? "Handling white-spaces"
+    text = text.trim()
+
+    if (!text) {
+      return next(new CustomError("Text field can't be empty.", 400))
+    }
 
     if (senderId === receiverId) {
       return next(new CustomError("You can't send message to yourself.", 400))
